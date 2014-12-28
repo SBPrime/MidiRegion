@@ -1,0 +1,30 @@
+name: MidiRegion
+main: org.primesoft.midiregion.MidiRegionMain
+version: 0.0.1
+website: https://github.com/SBPrime/MidiRegion/wiki
+dev-url: https://github.com/SBPrime/MidiRegion/wiki
+description: Plugin that allows you to add custom music for WorldGuard regions.
+depend: [WorldGuard]
+authors: [SBPrime]
+commands:
+  mrreload:
+    description: 'Reload the config'
+    usage: /<command>
+    permission: midiregion.admin.reload
+  test:
+    description: ''
+    usage: /<command>
+permissions:
+  midiregion.*:
+    description: Grants access to all MidiRegion permissions
+    default: op
+    children:      
+      midiregion.admin.*: true
+  midiregion.admin.*:
+    description: Grants access to all MidiRegion admin permissions
+    default: op
+    children:      
+      midiregion.admin.reload: true
+  midiregion.admin.reload:
+    description: Allows you to reload MidiRegion config
+    default: op
