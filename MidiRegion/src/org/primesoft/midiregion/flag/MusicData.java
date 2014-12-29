@@ -38,45 +38,65 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.primesoft.midiregion;
-
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.sk89q.worldguard.protection.flags.Flag;
-import com.sk89q.worldguard.protection.flags.InvalidFlagFormat;
-import com.sk89q.worldguard.protection.flags.RegionGroup;
-import org.bukkit.command.CommandSender;
+package org.primesoft.midiregion.flag;
 
 /**
  *
  * @author SBPrime
  */
-public class MusicFlag extends Flag<String> {
+public class MusicData {
 
-    private final static String MUSIC_FLAG = "Midi-Music";
+    /**
+     * Loop the music in region
+     */
+    private final boolean m_loop;
 
-    private final static MusicFlag s_instance = new MusicFlag();
+    /**
+     * Reset the music to start when region is empty
+     */
+    private final boolean m_resetOnEmpty;
 
-    public static MusicFlag getInstance() {
-        return s_instance;
+    /**
+     * The midi file
+     */
+    private final String m_midiFile;
+
+    /**
+     * Is the music looped
+     *
+     * @return
+     */
+    public boolean isLooped() {
+        return m_loop;
     }
 
-    public MusicFlag() {
-        super(MUSIC_FLAG);
+    /**
+     * Reset the music when region is empty
+     *
+     * @return
+     */
+    public boolean resetOnEmpty() {
+        return m_resetOnEmpty;
     }
 
-    @Override
-    public String parseInput(WorldGuardPlugin wgp, CommandSender cs, String string) throws InvalidFlagFormat {
-        return string;
+    /**
+     * Get the midi file
+     *
+     * @return
+     */
+    public String getMidiFile() {
+        return m_midiFile;
     }
 
-    @Override
-    public String unmarshal(Object o) {
-        return (o != null) ? o.toString() : "";
+    /**
+     * 
+     * @param loop Is the music looped
+     * @param reset Reset the music on 
+     * @param file 
+     */
+    public MusicData(boolean loop, boolean reset, String file) {
+        m_loop = loop;
+        m_resetOnEmpty = reset;
+        m_midiFile = file;
     }
-
-    @Override
-    public Object marshal(String t) {
-        return t;
-    }
-
 }

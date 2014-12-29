@@ -38,51 +38,12 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.primesoft.midiregion.commands;
-
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.sk89q.worldguard.protection.managers.RegionManager;
-import com.sk89q.worldguard.protection.regions.GlobalProtectedRegion;
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import org.bukkit.World;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-import org.primesoft.midiregion.MidiRegionMain;
-import org.primesoft.midiregion.flag.MusicData;
-import org.primesoft.midiregion.flag.MusicFlag;
+package org.primesoft.midiregion.utils;
 
 /**
  *
  * @author SBPrime
  */
-public class TestCommand extends BaseCommand {
-
-    /**
-     * Instance of plugin main
-     */
-    private final MidiRegionMain m_plugin;
-
-    public TestCommand(MidiRegionMain plugin) {
-        m_plugin = plugin;
-    }
-
-    @Override
-    public boolean onCommand(CommandSender cs, Command cmnd, String name, String[] args) {
-        Player player = cs instanceof Player ? (Player)cs : null;
-        if (player == null) {
-            return false;
-        }
-        
-        WorldGuardPlugin wgp = m_plugin.getWorldGuard();
-        World world = player.getWorld();
-        RegionManager regionManager = wgp.getRegionManager(world);
-        
-        ProtectedRegion region = new GlobalProtectedRegion("__global__");
-        region.setFlag(MusicFlag.getInstance(), new MusicData(true, false, "the midi file"));
-        
-        regionManager.addRegion(region);
-        return true;
-    }
-
+public class FormatException extends Exception {
+    
 }
